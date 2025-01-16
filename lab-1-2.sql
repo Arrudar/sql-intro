@@ -15,3 +15,4 @@
 -- +------+-----------------------------------+------+
 
 
+sqlite> select year, name, wins from teams order by wins;
