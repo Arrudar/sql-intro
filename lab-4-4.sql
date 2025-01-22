@@ -10,6 +10,24 @@ WHERE teams.year = "2019"
 GROUP BY teams.name
 order by teams.name;
 
+--____
+--Correct solution (bellow)
+
+
+SELECT teams.name, players.first_name, players.last_name, stats.home_runs
+FROM (
+  SELECT stats.team_id AS team_id, MAX(stats.home_runs) AS home_runs
+  FROM stats 
+  INNER JOIN teams ON teams.id = stats.team_id
+  WHERE teams.year = 2019
+  GROUP BY stats.team_id
+) AS max_run_stats
+INNER JOIN stats ON stats.team_id = max_run_stats.team_id
+AND stats.home_runs = max_run_stats.home_runs
+INNER JOIN teams ON stats.team_id = teams.id
+INNER JOIN players ON players.id = stats.player_id
+ORDER BY stats.home_runs desc;
+
 -- Expected result:
 --
 -- +-------------------------------+------------+-------------+----------------------+
