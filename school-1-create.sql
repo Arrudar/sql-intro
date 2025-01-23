@@ -1,3 +1,6 @@
+
+$ sqlite3 school.db
+.schema -- Will be empty
 -- Create the students table
 
 CREATE TABLE students (
